@@ -94,7 +94,7 @@
     }).join('');
     return (
       '<aside class="app-sidebar" id="app-sidebar" aria-label="Main">' +
-        '<a class="brand" href="workout.html"><span class="brand-mark"><img src="./png/logo.png" alt="" width="28" height="28"></span><span>FitNova</span></a>' +
+        '<a class="brand" href="workout.html"><span class="brand-mark"><img src="./images/logo.png" alt="" width="28" height="28"></span><span>FitNova</span></a>' +
         '<nav class="sidebar-nav">' + links + '</nav>' +
         '<div class="sidebar-foot">' +
           '<div class="user-chip">' +
@@ -129,13 +129,12 @@
           }).join('') +
         '</nav>'
       : chrome === 'auth'
-        ? '<nav class="nav-links"><a href="index.html">Home</a></nav>'
+        ? '<nav class="nav-links"><button class="linkish" type="button" data-go="home">Home</button></nav>'
         : '<nav class="nav-links">' +
-            APP_NAV.filter(function (item) {
-              return item.key === 'dashboard' || item.key === 'workouts' || item.key === 'exercises' || item.key === 'progress';
-            }).map(function (item) {
-              return '<a href="' + item.href + '">' + item.label + '</a>';
-            }).join('') +
+            '<button class="linkish" type="button">Dashboard</button>' +
+            '<button class="linkish" type="button">Workouts</button>' +
+            '<button class="linkish" type="button">Exercises</button>' +
+            '<button class="linkish" type="button">Progress</button>' +
           '</nav>';
 
     var right = isApp
@@ -150,16 +149,16 @@
         '<button class="btn btn-secondary btn-sm" type="button" data-logout>Log out</button>'
       : chrome === 'auth'
         ? (active === 'login'
-            ? '<a class="btn btn-primary" href="signup.html">Create account</a>'
-            : '<a class="btn btn-secondary" href="login.html">Log in</a>')
-        : '<a class="btn btn-secondary" href="login.html">Log in</a>' +
-          '<a class="btn btn-primary" href="signup.html">Start free</a>';
+            ? '<button class="btn btn-primary" type="button" data-go="signup">Create account</button>'
+            : '<button class="btn btn-secondary" type="button" data-go="login">Log in</button>')
+        : '<button class="btn btn-secondary" type="button" data-go="login">Log in</button>' +
+          '<button class="btn btn-primary" type="button" data-go="signup">Start free</button>';
 
     return (
       '<a class="skip-link" href="#main">Skip to content</a>' +
       '<header class="site-header">' +
         '<div class="header-inner">' +
-          '<a class="brand" href="' + (isApp ? 'workout.html' : 'index.html') + '"><span class="brand-mark"><img src="./png/logo.png" alt="FitNova" width="28" height="28"></span>FitNova</a>' +
+          '<button class="brand" type="button" data-go="home"><span class="brand-mark"><img src="./images/logo.png" alt="FitNova" width="28" height="28"></span>FitNova</button>' +
           '<button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="app-sidebar">☰</button>' +
           '<div class="header-menus">' + left +
             '<div class="nav-actions">' + right + '</div>' +
@@ -169,26 +168,45 @@
     );
   }
 
-  function footerMarkup() {
+  function footerMarkup(chrome) {
+    var training;
+    var desk;
+    if (chrome === 'app') {
+      training =
+        '<a href="workout.html">Dashboard</a>' +
+        '<a href="exercises.html">Exercise Library</a>' +
+        '<a href="detailedstats.html">Progress</a>' +
+        '<a href="timer.html">Timer</a>';
+      desk =
+        '<a href="goals.html">Goals</a>' +
+        '<a href="history.html">History</a>' +
+        '<a href="settings.html">Settings</a>' +
+        '<a href="profile.html">Profile</a>';
+    } else {
+      training =
+        '<button class="linkish" type="button">Dashboard</button>' +
+        '<button class="linkish" type="button">Exercise Library</button>' +
+        '<button class="linkish" type="button">Progress</button>' +
+        '<button class="linkish" type="button">Timer</button>';
+      desk =
+        '<button class="linkish" type="button">Goals</button>' +
+        '<button class="linkish" type="button">History</button>' +
+        '<button class="linkish" type="button">Settings</button>' +
+        '<button class="linkish" type="button">Profile</button>';
+    }
     return (
       '<footer class="site-footer">' +
         '<div class="wrap footer-grid">' +
           '<div>' +
-            '<a class="brand" href="index.html"><span class="brand-mark"><img src="./png/logo.png" alt="" width="28" height="28"></span>FitNova</a>' +
+            '<button class="brand" type="button" data-go="home"><span class="brand-mark"><img src="./images/logo.png" alt="" width="28" height="28"></span>FitNova</button>' +
           '</div>' +
           '<div>' +
             '<h4>Training</h4>' +
-            '<a href="workout.html">Dashboard</a>' +
-            '<a href="exercises.html">Exercise Library</a>' +
-            '<a href="detailedstats.html">Progress</a>' +
-            '<a href="timer.html">Timer</a>' +
+            training +
           '</div>' +
           '<div>' +
             '<h4>Desk</h4>' +
-            '<a href="goals.html">Goals</a>' +
-            '<a href="history.html">History</a>' +
-            '<a href="settings.html">Settings</a>' +
-            '<a href="profile.html">Profile</a>' +
+            desk +
           '</div>' +
         '</div>' +
         '<div class="wrap legal">© ' + new Date().getFullYear() + ' FitNova. Built with HTML, CSS &amp; Vanilla JavaScript.</div>' +
@@ -203,7 +221,7 @@
       icon.rel = 'icon';
       document.head.appendChild(icon);
     }
-    icon.href = './png/logo.png';
+    icon.href = './images/icon.png';
   }
 
   function mountChrome() {
@@ -214,7 +232,7 @@
     var user = root.StorageManager ? root.StorageManager.getSessionUser() : null;
 
     if (headerHost) headerHost.outerHTML = headerMarkup(chrome, active);
-    if (footerHost) footerHost.outerHTML = footerMarkup();
+    if (footerHost) footerHost.outerHTML = footerMarkup(chrome);
 
     if (chrome === 'app') {
       document.body.classList.add('has-app-nav');
@@ -258,7 +276,7 @@
       return false;
     }
     if ((active === 'login' || active === 'signup') && user) {
-      window.location.replace('workout.html');
+      window.location.replace('index.html');
       return false;
     }
     return true;
@@ -296,6 +314,17 @@
       showToast("You're offline — local fitness data is still available.", 'warning');
     });
     if (!navigator.onLine) paint(false);
+  }
+
+  function bindGoPages() {
+    document.addEventListener('click', function (event) {
+      var btn = event.target.closest('[data-go]');
+      if (!btn) return;
+      var go = btn.getAttribute('data-go');
+      if (go === 'home') window.location.href = 'index.html';
+      if (go === 'login') window.location.href = 'login.html';
+      if (go === 'signup') window.location.href = 'signup.html';
+    });
   }
 
   function bindAuth() {
@@ -352,7 +381,7 @@
           users.push(newUser);
           root.StorageManager.saveUsers(users);
           root.StorageManager.setSessionUser(newUser, true);
-          window.location.href = 'workout.html';
+          window.location.href = 'index.html';
         });
       });
     }
@@ -384,7 +413,7 @@
             return;
           }
           root.StorageManager.setSessionUser(user, remember);
-          window.location.href = 'workout.html';
+          window.location.href = 'index.html';
         });
       });
     }
@@ -442,6 +471,7 @@
       greet();
       setupNetworkStatus();
       bindAuth();
+      bindGoPages();
       root.__FT_READY = true;
       document.dispatchEvent(new CustomEvent('ft:ready'));
       if (root.Dashboard && typeof root.Dashboard.init === 'function') root.Dashboard.init();

@@ -136,6 +136,12 @@ p {
   font-family: var(--display);
   font-weight: 700;
   letter-spacing: -0.04em;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
 }
 
 .brand-mark {
@@ -213,7 +219,8 @@ p {
 }
 
 .nav-links a:hover,
-.nav-links a.active {
+.nav-links a.active,
+.nav-links button.linkish:hover {
   color: var(--text);
   background: rgba(255, 255, 255, 0.05);
 }
@@ -502,10 +509,18 @@ textarea:focus-visible {
 }
 
 .footer-grid a,
-.footer-grid p {
+.footer-grid p,
+.footer-grid button.linkish {
   display: block;
   margin: 6px 0;
   font-size: 14px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: default;
+  text-align: left;
+  padding: 0;
+  font-weight: 600;
 }
 
 .legal {
