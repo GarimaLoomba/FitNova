@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log in — FitNova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body data-chrome="auth" data-active="login">
+  <!-- Login page. The form id is login-form. app.js checks the email and password. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main" class="auth-shell">
+      <!-- Side message. This is not the form. -->
+      <section class="auth-visual login-visual">
+        <span class="chip">Secure desk</span>
+        <h2>Log in and return to the work.</h2>
+        <p class="muted">Your training log stays on this device. Sign in to open the dashboard, routes, and goals.</p>
+        <ul class="auth-points">
+          <li>Private local account</li>
+          <li>Saved workouts and stats</li>
+          <li>Continue on this browser</li>
+        </ul>
+      </section>
+      <!-- Login form. app.js checks email and password, then opens the dashboard. -->
+      <section class="auth-form">
+        <div class="auth-card">
+          <span class="chip">Members</span>
+          <h1>Log in</h1>
+          <p class="muted">This is a local demo login stored in this browser, not production authentication.</p>
+
+          <form id="login-form" class="form-grid" novalidate>
+            <label>Email
+              <input type="email" name="email" id="email" placeholder="you@email.com" autocomplete="email" required>
+            </label>
+            <label>Password
+              <div class="password-field">
+                <input type="password" name="password" id="password" placeholder="Enter password" autocomplete="current-password" required>
+                <button type="button" class="text-btn" data-toggle-password="password">Show</button>
+              </div>
+            </label>
+            <div class="auth-tools">
+              <label class="check">
+                <input type="checkbox" name="remember" id="remember">
+                <span>Remember me</span>
+              </label>
+            </div>
+            <p id="login-error" class="form-error" role="alert"></p>
+            <button class="btn btn-primary btn-full" type="submit">Log in to dashboard</button>
+          </form>
+
+          <div class="auth-note">No account yet? <a href="./signup.html">Create one</a> — it stays in this browser only.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/audio.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

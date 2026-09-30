@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up — FitNova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body data-chrome="auth" data-active="signup">
+  <!-- Sign-up page. The form id is signup-form. app.js saves the new account in this browser. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main" class="auth-shell">
+      <!-- Side message for new users. -->
+      <section class="auth-visual">
+        <span class="chip">New athlete</span>
+        <h2>Build a training record you can actually trust.</h2>
+        <p class="muted">Create a local profile in under a minute.</p>
+      </section>
+      <!-- Sign-up form. app.js saves the account in this browser. -->
+      <section class="auth-form">
+        <div class="auth-card">
+          <span class="chip">Create account</span>
+          <h1>Join FitNova</h1>
+          <p class="muted">Already a member? <a href="./login.html">Log in</a></p>
+          <form id="signup-form" class="form-grid">
+            <div class="form-row">
+              <label>First name
+                <input type="text" name="fname" id="fname" placeholder="Alex" required>
+              </label>
+              <label>Last name
+                <input type="text" name="lname" id="lname" placeholder="Morgan" required>
+              </label>
+            </div>
+            <label>Email
+              <input type="email" name="email" id="email" placeholder="you@email.com" required>
+            </label>
+            <label>Password
+              <div class="password-field">
+                <input type="password" name="password" id="password" placeholder="At least 6 characters" required>
+                <button type="button" class="text-btn" data-toggle-password="password">Show</button>
+              </div>
+            </label>
+            <div class="form-row">
+              <label>Birthdate
+                <input type="date" name="birthdate" id="birthdate" required>
+              </label>
+              <label>Gender
+                <select name="gender" id="gender" required>
+                  <option value="">Choose</option>
+                  <option value="female">Female</option>
+                  <option value="male">Male</option>
+                  <option value="other">Prefer not to say</option>
+                </select>
+              </label>
+            </div>
+            <label>Country
+              <select name="country" id="country" required>
+                <option value="India">India</option>
+                <option value="United States">United States</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Canada">Canada</option>
+                <option value="Australia">Australia</option>
+                <option value="Germany">Germany</option>
+                <option value="Singapore">Singapore</option>
+                <option value="United Arab Emirates">United Arab Emirates</option>
+              </select>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="checkbox">
+              <span>Send product notes and training ideas. You can skip this.</span>
+            </label>
+            <p id="signup-error" class="form-error"></p>
+            <button class="btn btn-primary btn-full" type="submit">Create account</button>
+            <p class="help">Local demo account only — stored in this browser, not production authentication.</p>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/audio.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

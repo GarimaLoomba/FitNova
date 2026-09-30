@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitNova — Train with intention</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body data-chrome="marketing" data-active="home">
+  <!-- Home page. app.js builds the header and footer. The sections below are the welcome screen. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main">
+      <!-- Welcome banner. Links go to signup and login. -->
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <span class="chip">Personal training OS</span>
+            <h1>Reach your best without the noise.</h1>
+            <p class="lede">Log workouts, browse exercises, and read your progress. A calm training desk for people who actually want to improve.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="./signup.html">Start training free</a>
+              <a class="btn btn-secondary" href="./login.html">Log in</a>
+            </div>
+            <div class="hero-meta">
+              <div><strong>12 wk</strong>adaptive plans</div>
+              <div><strong>Live</strong>calendar &amp; stats</div>
+              <div><strong>Local</strong>private to your browser</div>
+            </div>
+            <img class="hero-photo" src="./images/stores.webp" alt="FitNova on devices">
+          </div>
+          <div class="device" aria-hidden="true">
+            <div class="device-card device-main">
+              <span class="chip">This week</span>
+              <h3 style="margin-top:14px;font-size:28px;letter-spacing:-0.04em;">Threshold run · 8.2 mi</h3>
+              <p class="muted">Tuesday · 62 min · 724 kcal</p>
+              <div class="metric-row">
+                <div class="mini-stat"><span>Distance</span><strong>24.6</strong></div>
+                <div class="mini-stat"><span>Load</span><strong>High</strong></div>
+                <div class="mini-stat"><span>Streak</span><strong>11</strong></div>
+                <div class="mini-stat"><span>Sleep</span><strong>7.4h</strong></div>
+              </div>
+            </div>
+            <div class="device-card device-side">
+              <p class="muted">Next session</p>
+              <h3>Strength · Push</h3>
+              <p class="muted">Tomorrow, 6:30 AM</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="product" class="section">
+        <div class="wrap">
+          <div class="strip">
+            <article><span>Dashboard</span><strong>Today</strong></article>
+            <article><span>Workouts</span><strong>Log</strong></article>
+            <article><span>Progress</span><strong>Stats</strong></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="method" class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="chip">How it works</span>
+              <h2>Open the dashboard. Log the work. Read your progress.</h2>
+            </div>
+            <a class="btn btn-ghost" href="./signup.html">Get started</a>
+          </div>
+          <div class="feature-grid">
+            <article class="card">
+              <div class="icon-blob">01</div>
+              <h3>Start on the dashboard</h3>
+              <p class="muted">See today’s steps, water, calories, and goals in one place after you log in.</p>
+            </article>
+            <article class="card">
+              <div class="icon-blob">02</div>
+              <h3>Log workouts and exercises</h3>
+              <p class="muted">Save each session, then use the exercise library when you plan the next one.</p>
+            </article>
+            <article class="card">
+              <div class="icon-blob">03</div>
+              <h3>Check your progress</h3>
+              <p class="muted">Review the calendar and stats for the workouts you actually logged on this device.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div data-footer></div>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/audio.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
