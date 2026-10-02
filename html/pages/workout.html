@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — FitNova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body data-chrome="app" data-active="dashboard">
+  <!-- Dashboard. After login, this is the home screen. dashboard.js fills the numbers. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main" class="app-main">
+      <div class="wrap">
+        <div class="page-head">
+          <div>
+            <p class="muted" id="today-date"></p>
+            <p class="muted" id="last-visit"></p>
+            <h1 class="page-title" id="greeting">Welcome back</h1>
+          </div>
+        </div>
+
+        <section class="today-highlight-bar">
+          <div class="streak-badge" id="streak-badge" aria-live="polite">
+            <span class="streak-flame" aria-hidden="true">⚡</span>
+            <span>Calculating streak...</span>
+          </div>
+          <div class="daily-score-wrap">
+            <div class="daily-ring" data-daily-ring role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <span data-daily-overall>0%</span>
+            </div>
+            <div>
+              <strong style="display:block;font-size:15px;">Daily Target Completion</strong>
+              <p class="muted" style="font-size:13px;" data-daily-label>Steps, hydration, calories &amp; workout score</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="today-activity-grid" aria-label="Today's activity">
+          <article class="mini-metric"><span>Steps</span><strong data-today-steps>0</strong></article>
+          <article class="mini-metric"><span>Distance</span><strong data-today-distance>0.0 mi</strong></article>
+          <article class="mini-metric"><span>Calories burned</span><strong data-today-calories>0</strong></article>
+          <article class="mini-metric"><span>Active minutes</span><strong data-today-minutes>0 min</strong></article>
+          <article class="mini-metric"><span>Water</span><strong data-today-water>0 L</strong></article>
+          <article class="mini-metric"><span>Workouts</span><strong data-today-workouts>0</strong></article>
+        </section>
+
+        <section class="quick-actions" aria-label="Quick actions">
+          <button class="quick-action" type="button" data-quick="water"><span>Add water</span><strong>+250 ml</strong></button>
+          <button class="quick-action" type="button" data-quick="steps"><span>Add steps</span><strong>+1,000</strong></button>
+        </section>
+
+        <section class="panel" style="margin-bottom:20px;">
+          <div class="section-head"><div><p class="panel-kicker">Progress</p><h3>Today at a glance</h3></div></div>
+          <div class="feature-grid">
+            <article class="card"><span>Daily steps</span><div class="progress"><span data-goal-bar="steps"></span></div><p class="help" data-goal-copy="dash-steps">0 / 10000</p></article>
+            <article class="card"><span>Water</span><div class="progress"><span data-goal-bar="water"></span></div><p class="help" data-goal-copy="dash-water">0 L / 2 L</p></article>
+            <article class="card"><span>Weekly workouts</span><div class="progress"><span data-goal-bar="weekly"></span></div><p class="help" data-goal-copy="dash-weekly">0 / 4</p></article>
+            <article class="card"><span>Workout streak</span><p class="help" data-goal-copy="dash-streak">0 day streak</p></article>
+          </div>
+        </section>
+
+        <section class="tracker-grid">
+          <article class="tracker-card step-card">
+            <div>
+              <div class="tracker-header">
+                <span class="tracker-title">Daily Steps</span>
+                <span class="tracker-pct" data-step-pct>0%</span>
+              </div>
+              <div class="tracker-stat-row">
+                <strong class="tracker-value" data-step-current>0</strong>
+                <span class="tracker-goal">/ <span data-step-goal>10,000</span> steps</span>
+              </div>
+              <div class="progress" role="progressbar" aria-label="Daily steps progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <span data-step-bar></span>
+              </div>
+            </div>
+            <div class="tracker-actions">
+              <button class="btn btn-ghost btn-xs" type="button" data-step-add="500">+500</button>
+              <button class="btn btn-ghost btn-xs" type="button" data-step-add="1000">+1k</button>
+              <button class="btn btn-ghost btn-xs" type="button" data-step-add="-500">-500</button>
+              <button class="btn btn-secondary btn-xs" type="button" data-step-custom>Custom</button>
+              <button class="btn btn-secondary btn-xs" type="button" data-step-reset title="Reset steps">Reset</button>
+            </div>
+          </article>
+
+          <article class="tracker-card water-card">
+            <div>
+              <div class="tracker-header">
+                <span class="tracker-title">Hydration</span>
+                <span class="tracker-pct" data-water-pct>0%</span>
+              </div>
+              <div class="tracker-stat-row">
+                <strong class="tracker-value"><span data-water-current>0</span> <span style="font-size:18px;font-weight:600;color:var(--muted)">gl</span></strong>
+                <span class="tracker-goal">/ <span data-water-goal>8</span> glasses (<span data-water-ml>0 / 2000 ml</span>)</span>
+              </div>
+              <div class="water-visual-grid" data-water-visual aria-label="Water glasses indicator"></div>
+              <div class="progress" role="progressbar" aria-label="Hydration progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <span data-water-bar style="background: linear-gradient(90deg, var(--cyan), #4ab8f5);"></span>
+              </div>
+            </div>
+            <div class="tracker-actions">
+              <button class="btn btn-ghost btn-xs" type="button" data-water-add-ml="250">250 ml</button>
+              <button class="btn btn-ghost btn-xs" type="button" data-water-add-ml="500">500 ml</button>
+              <button class="btn btn-ghost btn-xs" type="button" data-water-add-ml="750">750 ml</button>
+              <button class="btn btn-ghost btn-xs" type="button" data-water-add-ml="1000">1000 ml</button>
+              <button class="btn btn-secondary btn-xs" type="button" data-water-custom>Custom</button>
+              <button class="btn btn-ghost btn-xs" type="button" data-water-add>+1 Glass</button>
+              <button class="btn btn-ghost btn-xs" type="button" data-water-remove>-1 Glass</button>
+              <button class="btn btn-secondary btn-xs" type="button" data-water-reset title="Reset water">Reset</button>
+            </div>
+          </article>
+
+          <article class="tracker-card cal-card">
+            <div>
+              <div class="tracker-header">
+                <span class="tracker-title">Calories Consumed</span>
+                <span class="tracker-pct" data-cal-pct>0%</span>
+              </div>
+              <div class="tracker-stat-row">
+                <strong class="tracker-value" data-cal-consumed>0</strong>
+                <span class="tracker-goal">/ <span data-cal-goal>2,200</span> kcal</span>
+              </div>
+              <p class="delta cal-positive" data-cal-remaining>2,200 kcal left</p>
+              <div class="progress" role="progressbar" aria-label="Calorie progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <span data-cal-bar style="background: linear-gradient(90deg, var(--orange), #ff5d6c);"></span>
+              </div>
+            </div>
+            <div class="tracker-actions">
+              <button class="btn btn-ghost btn-xs" type="button" data-cal-add="150">+150</button>
+              <button class="btn btn-ghost btn-xs" type="button" data-cal-add="300">+300</button>
+              <button class="btn btn-ghost btn-xs" type="button" data-cal-add="500">+500</button>
+              <button class="btn btn-secondary btn-xs" type="button" data-cal-custom>Custom</button>
+              <button class="btn btn-secondary btn-xs" type="button" data-cal-reset title="Reset calories">Reset</button>
+            </div>
+          </article>
+        </section>
+
+        <section class="stat-grid">
+          <article class="stat-card">
+            <span>Distance</span>
+            <strong class="stat-value"><span data-stat="distance">0.0</span> mi</strong>
+            <p class="delta">All logged sessions</p>
+          </article>
+          <article class="stat-card">
+            <span>Duration</span>
+            <strong class="stat-value" data-stat="duration">0m</strong>
+            <p class="delta">Time under load</p>
+          </article>
+          <article class="stat-card">
+            <span>Calories</span>
+            <strong class="stat-value"><span data-stat="calories">0</span> kcal</strong>
+            <p class="delta">Energy burned</p>
+          </article>
+          <article class="stat-card">
+            <span>Workouts</span>
+            <strong class="stat-value" data-stat="workouts">0</strong>
+            <p class="delta">Completed sessions</p>
+          </article>
+        </section>
+
+        <section class="layout-2" style="margin-bottom: 24px;">
+          <article class="panel">
+            <div class="section-head">
+              <div>
+                <p class="panel-kicker">Calendar</p>
+                <h3>This month</h3>
+              </div>
+            </div>
+            <div id="calendar" class="calendar"></div>
+          </article>
+          <aside class="panel">
+            <p class="panel-kicker">Activity</p>
+            <h3>Recent work</h3>
+            <div id="activity-list"></div>
+          </aside>
+        </section>
+      </div>
+    </main>
+    <div data-footer></div>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/dashboard.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

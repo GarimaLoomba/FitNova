@@ -10,34 +10,26 @@
 (function (root) {
   'use strict';
 
+  var LOGO = './png/logo.png';
+
   var pages = {
     home: 'index.html',
     login: 'login.html',
     signup: 'signup.html',
-    dashboard: 'workout.html',
-    workouts: 'history.html',
-    exercises: 'exercises.html',
-    history: 'history.html',
-    progress: 'detailedstats.html',
-    stats: 'detailedstats.html',
-    timer: 'timer.html',
-    routes: 'route.html',
-    goals: 'goals.html',
-    profile: 'profile.html',
-    settings: 'settings.html'
+    dashboard: 'workout.html'
   };
 
   var APP_NAV = [
     { key: 'dashboard', href: 'workout.html', label: 'Dashboard', icon: '▣' },
-    { key: 'workouts', href: 'history.html', label: 'Workouts', icon: '☰' },
-    { key: 'exercises', href: 'exercises.html', label: 'Exercises', icon: '＋' },
-    { key: 'history', href: 'history.html', label: 'History', icon: '◷' },
-    { key: 'progress', href: 'detailedstats.html', label: 'Progress', icon: '▲' },
-    { key: 'goals', href: 'goals.html', label: 'Goals', icon: '☆' },
-    { key: 'timer', href: 'timer.html', label: 'Timer', icon: '▶' },
-    { key: 'routes', href: 'route.html', label: 'Routes', icon: '⌖' },
-    { key: 'profile', href: 'profile.html', label: 'Profile', icon: '☺' },
-    { key: 'settings', href: 'settings.html', label: 'Settings', icon: '⚙' }
+    { key: 'workouts', label: 'Workouts', icon: '☰' },
+    { key: 'exercises', label: 'Exercises', icon: '＋' },
+    { key: 'history', label: 'History', icon: '◷' },
+    { key: 'progress', label: 'Progress', icon: '▲' },
+    { key: 'goals', label: 'Goals', icon: '☆' },
+    { key: 'timer', label: 'Timer', icon: '▶' },
+    { key: 'routes', label: 'Routes', icon: '⌖' },
+    { key: 'profile', label: 'Profile', icon: '☺' },
+    { key: 'settings', label: 'Settings', icon: '⚙' }
   ];
 
   function findOne(selector, parent) { return (parent || document).querySelector(selector); }
@@ -86,15 +78,33 @@
     return '';
   }
 
+  function navInner(item) {
+    return '<span class="nav-ico" aria-hidden="true">' + item.icon + '</span><span>' + item.label + '</span>';
+  }
+
+  function navItemMarkup(item, active) {
+    var cls = navClass(active, item.key);
+    if (item.href) {
+      return '<a class="' + cls + '" href="' + item.href + '">' + navInner(item) + '</a>';
+    }
+    return '<button class="linkish ' + cls + '" type="button">' + navInner(item) + '</button>';
+  }
+
+  function headerNavItem(item, active) {
+    var cls = navClass(active, item.key);
+    if (item.href) {
+      return '<a class="' + cls + '" href="' + item.href + '">' + item.label + '</a>';
+    }
+    return '<button class="linkish ' + cls + '" type="button">' + item.label + '</button>';
+  }
+
   function sidebarMarkup(active, user) {
     var links = APP_NAV.map(function (item) {
-      return '<a class="' + navClass(active, item.key) + '" href="' + item.href + '">' +
-        '<span class="nav-ico" aria-hidden="true">' + item.icon + '</span>' +
-        '<span>' + item.label + '</span></a>';
+      return navItemMarkup(item, active);
     }).join('');
     return (
       '<aside class="app-sidebar" id="app-sidebar" aria-label="Main">' +
-        '<a class="brand" href="workout.html"><span class="brand-mark"><img src="./images/logo.png" alt="" width="28" height="28"></span><span>FitNova</span></a>' +
+        '<a class="brand" href="workout.html"><span class="brand-mark"><img src="' + LOGO + '" alt="" width="28" height="28"></span><span>FitNova</span></a>' +
         '<nav class="sidebar-nav">' + links + '</nav>' +
         '<div class="sidebar-foot">' +
           '<div class="user-chip">' +
@@ -112,8 +122,7 @@
       APP_NAV[0], APP_NAV[2], APP_NAV[1], APP_NAV[4], APP_NAV[9]
     ];
     return '<nav class="bottom-nav" aria-label="Mobile">' + items.map(function (item) {
-      return '<a class="' + navClass(active, item.key) + '" href="' + item.href + '">' +
-        '<span aria-hidden="true">' + item.icon + '</span><span>' + item.label + '</span></a>';
+      return navItemMarkup(item, active);
     }).join('') + '</nav>';
   }
 
@@ -125,13 +134,13 @@
     var left = isApp
       ? '<nav class="nav-links header-app-links">' +
           APP_NAV.slice(0, 6).map(function (item) {
-            return '<a class="' + navClass(active, item.key) + '" href="' + item.href + '">' + item.label + '</a>';
+            return headerNavItem(item, active);
           }).join('') +
         '</nav>'
       : chrome === 'auth'
         ? '<nav class="nav-links"><button class="linkish" type="button" data-go="home">Home</button></nav>'
         : '<nav class="nav-links">' +
-            '<button class="linkish" type="button">Dashboard</button>' +
+            '<a href="workout.html">Dashboard</a>' +
             '<button class="linkish" type="button">Workouts</button>' +
             '<button class="linkish" type="button">Exercises</button>' +
             '<button class="linkish" type="button">Progress</button>' +
@@ -141,11 +150,10 @@
       ? '<span class="net-status ' + (online ? 'is-online' : 'is-offline') + '" id="net-status" role="status">' +
           '<span class="net-dot" aria-hidden="true"></span>' + (online ? 'Online' : 'Offline') +
         '</span>' +
-        '<button class="btn btn-primary btn-sm" type="button" data-open-log>+ Log workout</button>' +
-        '<a class="user-chip" href="profile.html" title="' + ((user && user.email) || '') + '">' +
+        '<span class="user-chip" title="' + ((user && user.email) || '') + '">' +
           '<span class="avatar">' + initials(user && user.name) + '</span>' +
           '<span>' + ((user && user.name) || 'Athlete') + '</span>' +
-        '</a>' +
+        '</span>' +
         '<button class="btn btn-secondary btn-sm" type="button" data-logout>Log out</button>'
       : chrome === 'auth'
         ? (active === 'login'
@@ -158,7 +166,7 @@
       '<a class="skip-link" href="#main">Skip to content</a>' +
       '<header class="site-header">' +
         '<div class="header-inner">' +
-          '<button class="brand" type="button" data-go="home"><span class="brand-mark"><img src="./images/logo.png" alt="FitNova" width="28" height="28"></span>FitNova</button>' +
+          '<button class="brand" type="button" data-go="home"><span class="brand-mark"><img src="' + LOGO + '" alt="FitNova" width="28" height="28"></span>FitNova</button>' +
           '<button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="app-sidebar">☰</button>' +
           '<div class="header-menus">' + left +
             '<div class="nav-actions">' + right + '</div>' +
@@ -171,34 +179,21 @@
   function footerMarkup(chrome) {
     var training;
     var desk;
-    if (chrome === 'app') {
-      training =
-        '<a href="workout.html">Dashboard</a>' +
-        '<a href="exercises.html">Exercise Library</a>' +
-        '<a href="detailedstats.html">Progress</a>' +
-        '<a href="timer.html">Timer</a>';
-      desk =
-        '<a href="goals.html">Goals</a>' +
-        '<a href="history.html">History</a>' +
-        '<a href="settings.html">Settings</a>' +
-        '<a href="profile.html">Profile</a>';
-    } else {
-      training =
-        '<button class="linkish" type="button">Dashboard</button>' +
-        '<button class="linkish" type="button">Exercise Library</button>' +
-        '<button class="linkish" type="button">Progress</button>' +
-        '<button class="linkish" type="button">Timer</button>';
-      desk =
-        '<button class="linkish" type="button">Goals</button>' +
-        '<button class="linkish" type="button">History</button>' +
-        '<button class="linkish" type="button">Settings</button>' +
-        '<button class="linkish" type="button">Profile</button>';
-    }
+    training =
+      '<a href="workout.html">Dashboard</a>' +
+      '<button class="linkish" type="button">Exercise Library</button>' +
+      '<button class="linkish" type="button">Progress</button>' +
+      '<button class="linkish" type="button">Timer</button>';
+    desk =
+      '<button class="linkish" type="button">Goals</button>' +
+      '<button class="linkish" type="button">History</button>' +
+      '<button class="linkish" type="button">Settings</button>' +
+      '<button class="linkish" type="button">Profile</button>';
     return (
       '<footer class="site-footer">' +
         '<div class="wrap footer-grid">' +
           '<div>' +
-            '<button class="brand" type="button" data-go="home"><span class="brand-mark"><img src="./images/logo.png" alt="" width="28" height="28"></span>FitNova</button>' +
+            '<button class="brand" type="button" data-go="home"><span class="brand-mark"><img src="' + LOGO + '" alt="" width="28" height="28"></span>FitNova</button>' +
           '</div>' +
           '<div>' +
             '<h4>Training</h4>' +
@@ -221,7 +216,7 @@
       icon.rel = 'icon';
       document.head.appendChild(icon);
     }
-    icon.href = './images/icon.png';
+    icon.href = LOGO;
   }
 
   function mountChrome() {
@@ -276,7 +271,7 @@
       return false;
     }
     if ((active === 'login' || active === 'signup') && user) {
-      window.location.replace('index.html');
+      window.location.replace('workout.html');
       return false;
     }
     return true;
@@ -324,6 +319,7 @@
       if (go === 'home') window.location.href = 'index.html';
       if (go === 'login') window.location.href = 'login.html';
       if (go === 'signup') window.location.href = 'signup.html';
+      if (go === 'dashboard') window.location.href = 'workout.html';
     });
   }
 
@@ -381,7 +377,7 @@
           users.push(newUser);
           root.StorageManager.saveUsers(users);
           root.StorageManager.setSessionUser(newUser, true);
-          window.location.href = 'index.html';
+          window.location.href = 'workout.html';
         });
       });
     }
@@ -413,7 +409,7 @@
             return;
           }
           root.StorageManager.setSessionUser(user, remember);
-          window.location.href = 'index.html';
+          window.location.href = 'workout.html';
         });
       });
     }

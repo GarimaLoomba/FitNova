@@ -517,10 +517,17 @@ textarea:focus-visible {
   border: 0;
   background: transparent;
   color: inherit;
-  cursor: default;
   text-align: left;
   padding: 0;
   font-weight: 600;
+}
+
+.footer-grid a {
+  cursor: pointer;
+}
+
+.footer-grid button.linkish {
+  cursor: default;
 }
 
 .legal {
@@ -1692,7 +1699,8 @@ body {
   overflow: auto;
 }
 
-.sidebar-nav a {
+.sidebar-nav a,
+.sidebar-nav button.linkish {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1702,10 +1710,15 @@ body {
   font-size: 14px;
   font-weight: 650;
   min-height: 44px;
+  border: 0;
+  background: transparent;
+  width: 100%;
+  text-align: left;
 }
 
 .sidebar-nav a:hover,
-.sidebar-nav a.active {
+.sidebar-nav a.active,
+.sidebar-nav button.linkish:hover {
   color: var(--text);
   background: rgba(200, 245, 74, 0.1);
 }
@@ -1911,7 +1924,8 @@ body {
     backdrop-filter: blur(16px);
   }
 
-  .bottom-nav a {
+  .bottom-nav a,
+  .bottom-nav button.linkish {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1921,9 +1935,13 @@ body {
     font-size: 11px;
     font-weight: 700;
     min-height: 48px;
+    border: 0;
+    background: transparent;
+    width: 100%;
   }
 
-  .bottom-nav a.active {
+  .bottom-nav a.active,
+  .bottom-nav button.linkish.active {
     color: var(--accent);
   }
 
