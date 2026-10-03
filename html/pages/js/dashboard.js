@@ -468,6 +468,9 @@
         const quickButton = event.target.closest('[data-quick]');
         if (!quickButton) return;
         const actionName = quickButton.getAttribute('data-quick');
+        if (actionName === 'log' && root.Workouts && typeof root.Workouts.openModal === 'function') {
+          root.Workouts.openModal();
+        }
         if (actionName === 'water' && root.StorageManager.addWaterMl) {
           root.StorageManager.addWaterMl(250);
           dashboard.renderAll();

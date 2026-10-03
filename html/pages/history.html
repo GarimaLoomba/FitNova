@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout History — FitNova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body data-chrome="app" data-active="history">
+  <!-- Workout history. workouts.js fills #workout-history-list from saved workouts. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main" class="app-main">
+      <div class="wrap">
+        <!-- Title and the button that opens the workout form. -->
+        <div class="page-head">
+          <div>
+            <p class="muted">Training log</p>
+            <h1 class="page-title">Workout History</h1>
+          </div>
+          <button class="btn btn-primary" type="button" data-open-log>+ Log workout</button>
+        </div>
+        <!-- Search, type, status, dates, and sort. workouts.js redraws the list. -->
+        <section class="panel">
+          <div class="section-head">
+            <div>
+              <p class="panel-kicker">Search, filter, sort</p>
+              <h3>All sessions</h3>
+            </div>
+            <span id="workout-history-count" class="chip">0 sessions</span>
+          </div>
+          <div class="history-filters">
+            <input type="text" id="history-search" placeholder="Search by type, notes, or exercise" autocomplete="off">
+            <select id="history-filter-type">
+              <option value="all">All types</option>
+              <option value="Running">Running</option>
+              <option value="Walking">Walking</option>
+              <option value="Cycling">Cycling</option>
+              <option value="Gym">Gym</option>
+              <option value="Strength Training">Strength Training</option>
+              <option value="Yoga">Yoga</option>
+              <option value="HIIT">HIIT</option>
+              <option value="Swimming">Swimming</option>
+              <option value="Cardio">Cardio</option>
+              <option value="Other">Other</option>
+            </select>
+            <select id="history-filter-status">
+              <option value="all">All status</option>
+              <option value="completed">Completed</option>
+              <option value="planned">Planned</option>
+            </select>
+            <input type="date" id="history-filter-from" aria-label="From date">
+            <input type="date" id="history-filter-to" aria-label="To date">
+            <select id="history-sort">
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="calories">Calories</option>
+              <option value="duration">Duration</option>
+            </select>
+          </div>
+          <div id="workout-history-list"></div>
+        </section>
+      </div>
+    </main>
+    <div data-footer></div>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/workouts.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

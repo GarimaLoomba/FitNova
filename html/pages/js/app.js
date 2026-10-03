@@ -16,14 +16,16 @@
     home: 'index.html',
     login: 'login.html',
     signup: 'signup.html',
-    dashboard: 'workout.html'
+    dashboard: 'workout.html',
+    workouts: 'history.html',
+    history: 'history.html'
   };
 
   var APP_NAV = [
     { key: 'dashboard', href: 'workout.html', label: 'Dashboard', icon: '▣' },
-    { key: 'workouts', label: 'Workouts', icon: '☰' },
+    { key: 'workouts', href: 'history.html', label: 'Workouts', icon: '☰' },
     { key: 'exercises', label: 'Exercises', icon: '＋' },
-    { key: 'history', label: 'History', icon: '◷' },
+    { key: 'history', href: 'history.html', label: 'History', icon: '◷' },
     { key: 'progress', label: 'Progress', icon: '▲' },
     { key: 'goals', label: 'Goals', icon: '☆' },
     { key: 'timer', label: 'Timer', icon: '▶' },
@@ -141,7 +143,7 @@
         ? '<nav class="nav-links"><button class="linkish" type="button" data-go="home">Home</button></nav>'
         : '<nav class="nav-links">' +
             '<a href="workout.html">Dashboard</a>' +
-            '<button class="linkish" type="button">Workouts</button>' +
+            '<a href="history.html">Workouts</a>' +
             '<button class="linkish" type="button">Exercises</button>' +
             '<button class="linkish" type="button">Progress</button>' +
           '</nav>';
@@ -150,6 +152,7 @@
       ? '<span class="net-status ' + (online ? 'is-online' : 'is-offline') + '" id="net-status" role="status">' +
           '<span class="net-dot" aria-hidden="true"></span>' + (online ? 'Online' : 'Offline') +
         '</span>' +
+        '<button class="btn btn-primary btn-sm" type="button" data-open-log>+ Log workout</button>' +
         '<span class="user-chip" title="' + ((user && user.email) || '') + '">' +
           '<span class="avatar">' + initials(user && user.name) + '</span>' +
           '<span>' + ((user && user.name) || 'Athlete') + '</span>' +
@@ -186,7 +189,7 @@
       '<button class="linkish" type="button">Timer</button>';
     desk =
       '<button class="linkish" type="button">Goals</button>' +
-      '<button class="linkish" type="button">History</button>' +
+      '<a href="history.html">History</a>' +
       '<button class="linkish" type="button">Settings</button>' +
       '<button class="linkish" type="button">Profile</button>';
     return (
@@ -320,6 +323,7 @@
       if (go === 'login') window.location.href = 'login.html';
       if (go === 'signup') window.location.href = 'signup.html';
       if (go === 'dashboard') window.location.href = 'workout.html';
+      if (go === 'workouts' || go === 'history') window.location.href = 'history.html';
     });
   }
 
@@ -471,6 +475,7 @@
       root.__FT_READY = true;
       document.dispatchEvent(new CustomEvent('ft:ready'));
       if (root.Dashboard && typeof root.Dashboard.init === 'function') root.Dashboard.init();
+      if (root.Workouts && typeof root.Workouts.init === 'function') root.Workouts.init();
     });
   });
 
