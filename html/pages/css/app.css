@@ -1826,6 +1826,8 @@ body {
   gap: 12px;
   margin-bottom: 16px;
 }
+
+.video-frame {
   position: relative;
   width: 100%;
   padding-top: 56.25%;

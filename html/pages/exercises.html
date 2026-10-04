@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise Library — FitNova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body data-chrome="app" data-active="exercises">
+  <!-- Exercise library. exercises.js draws one card for each exercise in its list. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main" class="app-main">
+      <div class="wrap">
+        <!-- Title and how many exercises match the filters. -->
+        <div class="page-head">
+          <div>
+            <p class="muted">Movement Catalog</p>
+            <h1 class="page-title">Exercise Library</h1>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span id="exercise-results-count" class="chip">0 exercises</span>
+          </div>
+        </div>
+        <div class="api-status" id="exercise-api-status">Using the local exercise library.</div>
+
+        <!-- Search box, muscle buttons, equipment, difficulty, and sort. -->
+        <section class="panel" style="margin-bottom:20px;padding:20px;">
+          <div class="search-bar" style="margin-top:0;">
+            <input type="text" id="exercise-search" placeholder="Search exercises by name, keyword, or equipment..." autocomplete="off">
+          </div>
+
+          <!-- Muscle Group Filter Pills -->
+          <div class="filters" style="margin-top:16px;margin-bottom:12px;">
+            <button class="pill active" type="button" data-muscle-filter="all">All Muscles (<span data-count="all">0</span>)</button>
+            <button class="pill" type="button" data-muscle-filter="chest">Chest (<span data-count="chest">0</span>)</button>
+            <button class="pill" type="button" data-muscle-filter="back">Back (<span data-count="back">0</span>)</button>
+            <button class="pill" type="button" data-muscle-filter="legs">Legs (<span data-count="legs">0</span>)</button>
+            <button class="pill" type="button" data-muscle-filter="shoulders">Shoulders (<span data-count="shoulders">0</span>)</button>
+            <button class="pill" type="button" data-muscle-filter="arms">Arms (<span data-count="arms">0</span>)</button>
+            <button class="pill" type="button" data-muscle-filter="core">Core (<span data-count="core">0</span>)</button>
+            <button class="pill" type="button" data-muscle-filter="cardio">Cardio (<span data-count="cardio">0</span>)</button>
+            <button class="pill" type="button" data-muscle-filter="full body">Full Body (<span data-count="full body">0</span>)</button>
+          </div>
+
+          <!-- Secondary Filters & Sorting -->
+          <div class="form-row" style="grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px;">
+            <label style="font-size:12px;">Equipment
+              <select id="filter-equipment">
+                <option value="all">All Equipment</option>
+                <option value="Barbell">Barbell</option>
+                <option value="Dumbbells">Dumbbells</option>
+                <option value="Bodyweight">Bodyweight</option>
+                <option value="Cable">Cable</option>
+                <option value="Machine">Machine</option>
+                <option value="Kettlebell">Kettlebell</option>
+              </select>
+            </label>
+            <label style="font-size:12px;">Difficulty
+              <select id="filter-difficulty">
+                <option value="all">All Difficulties</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+              </select>
+            </label>
+            <label style="font-size:12px;">Sort Order
+              <select id="sort-exercises">
+                <option value="name-asc">Alphabetical (A - Z)</option>
+                <option value="name-desc">Alphabetical (Z - A)</option>
+                <option value="difficulty">Difficulty Level</option>
+                <option value="muscle">Muscle Group</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <!-- Exercise cards. exercises.js builds this list. -->
+        <section id="exercise-grid" class="feature-grid" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px;">
+          <!-- Populated dynamically by exercises.js using Array.map() -->
+        </section>
+      </div>
+    </main>
+    <div data-footer></div>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/exercises.js"></script>
+  <script src="./js/workouts.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

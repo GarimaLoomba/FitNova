@@ -18,13 +18,14 @@
     signup: 'signup.html',
     dashboard: 'workout.html',
     workouts: 'history.html',
-    history: 'history.html'
+    history: 'history.html',
+    exercises: 'exercises.html'
   };
 
   var APP_NAV = [
     { key: 'dashboard', href: 'workout.html', label: 'Dashboard', icon: '▣' },
     { key: 'workouts', href: 'history.html', label: 'Workouts', icon: '☰' },
-    { key: 'exercises', label: 'Exercises', icon: '＋' },
+    { key: 'exercises', href: 'exercises.html', label: 'Exercises', icon: '＋' },
     { key: 'history', href: 'history.html', label: 'History', icon: '◷' },
     { key: 'progress', label: 'Progress', icon: '▲' },
     { key: 'goals', label: 'Goals', icon: '☆' },
@@ -144,7 +145,7 @@
         : '<nav class="nav-links">' +
             '<a href="workout.html">Dashboard</a>' +
             '<a href="history.html">Workouts</a>' +
-            '<button class="linkish" type="button">Exercises</button>' +
+            '<a href="exercises.html">Exercises</a>' +
             '<button class="linkish" type="button">Progress</button>' +
           '</nav>';
 
@@ -184,7 +185,7 @@
     var desk;
     training =
       '<a href="workout.html">Dashboard</a>' +
-      '<button class="linkish" type="button">Exercise Library</button>' +
+      '<a href="exercises.html">Exercise Library</a>' +
       '<button class="linkish" type="button">Progress</button>' +
       '<button class="linkish" type="button">Timer</button>';
     desk =
@@ -324,6 +325,7 @@
       if (go === 'signup') window.location.href = 'signup.html';
       if (go === 'dashboard') window.location.href = 'workout.html';
       if (go === 'workouts' || go === 'history') window.location.href = 'history.html';
+      if (go === 'exercises') window.location.href = 'exercises.html';
     });
   }
 
@@ -476,6 +478,7 @@
       document.dispatchEvent(new CustomEvent('ft:ready'));
       if (root.Dashboard && typeof root.Dashboard.init === 'function') root.Dashboard.init();
       if (root.Workouts && typeof root.Workouts.init === 'function') root.Workouts.init();
+      if (root.Exercises && typeof root.Exercises.init === 'function') root.Exercises.init();
     });
   });
 
