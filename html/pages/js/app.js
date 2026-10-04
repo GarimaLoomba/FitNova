@@ -479,6 +479,12 @@
       if (root.Dashboard && typeof root.Dashboard.init === 'function') root.Dashboard.init();
       if (root.Workouts && typeof root.Workouts.init === 'function') root.Workouts.init();
       if (root.Exercises && typeof root.Exercises.init === 'function') root.Exercises.init();
+      if (root.ApiService && typeof root.ApiService.enrichExercises === 'function' && root.Exercises) {
+        root.ApiService.enrichExercises(root.Exercises);
+      }
+      if (root.ApiService && typeof root.ApiService.renderAdviceWidget === 'function') {
+        root.ApiService.renderAdviceWidget();
+      }
     });
   });
 
