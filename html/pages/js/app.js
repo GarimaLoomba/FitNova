@@ -19,7 +19,8 @@
     dashboard: 'workout.html',
     workouts: 'history.html',
     history: 'history.html',
-    exercises: 'exercises.html'
+    exercises: 'exercises.html',
+    timer: 'timer.html'
   };
 
   var APP_NAV = [
@@ -29,7 +30,7 @@
     { key: 'history', href: 'history.html', label: 'History', icon: '◷' },
     { key: 'progress', label: 'Progress', icon: '▲' },
     { key: 'goals', label: 'Goals', icon: '☆' },
-    { key: 'timer', label: 'Timer', icon: '▶' },
+    { key: 'timer', href: 'timer.html', label: 'Timer', icon: '▶' },
     { key: 'routes', label: 'Routes', icon: '⌖' },
     { key: 'profile', label: 'Profile', icon: '☺' },
     { key: 'settings', label: 'Settings', icon: '⚙' }
@@ -187,7 +188,7 @@
       '<a href="workout.html">Dashboard</a>' +
       '<a href="exercises.html">Exercise Library</a>' +
       '<button class="linkish" type="button">Progress</button>' +
-      '<button class="linkish" type="button">Timer</button>';
+      '<a href="timer.html">Timer</a>';
     desk =
       '<button class="linkish" type="button">Goals</button>' +
       '<a href="history.html">History</a>' +
@@ -326,6 +327,7 @@
       if (go === 'dashboard') window.location.href = 'workout.html';
       if (go === 'workouts' || go === 'history') window.location.href = 'history.html';
       if (go === 'exercises') window.location.href = 'exercises.html';
+      if (go === 'timer') window.location.href = 'timer.html';
     });
   }
 
@@ -485,6 +487,7 @@
       if (root.ApiService && typeof root.ApiService.renderAdviceWidget === 'function') {
         root.ApiService.renderAdviceWidget();
       }
+      if (root.TimerManager && typeof root.TimerManager.init === 'function') root.TimerManager.init();
     });
   });
 

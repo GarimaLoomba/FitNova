@@ -468,6 +468,7 @@
         const quickButton = event.target.closest('[data-quick]');
         if (!quickButton) return;
         const actionName = quickButton.getAttribute('data-quick');
+        if (actionName === 'timer') window.location.href = 'timer.html';
         if (actionName === 'log' && root.Workouts && typeof root.Workouts.openModal === 'function') {
           root.Workouts.openModal();
         }

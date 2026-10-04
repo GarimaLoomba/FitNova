@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout & Rest Timers — FitNova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/timer.css">
+</head>
+<body data-chrome="app" data-active="timer">
+  <!-- Timer page. timer.js runs the clocks. audio.js plays the beeps. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main" class="app-main">
+      <div class="wrap">
+        <div class="page-head">
+          <div>
+            <p class="muted">Interval &amp; Training Pacing</p>
+            <h1 class="page-title">Workout &amp; Rest Timers</h1>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <button id="sound-toggle-btn" class="pill active" type="button" title="Mute or unmute beeps">🔊 Sound On</button>
+            <button id="btn-test-sound" class="pill" type="button" title="Play a test beep">▶ Test sound</button>
+          </div>
+        </div>
+
+        <section class="card-grid" style="margin-bottom: 24px;">
+          <article class="panel">
+            <div class="tracker-header">
+              <span class="chip">Stopwatch</span>
+              <span class="muted" style="font-size:12px;">Persists across refresh</span>
+            </div>
+            <h3>Active Session Timer</h3>
+            <div id="stopwatch-display" class="timer-display">00:00:00</div>
+            <p class="muted" style="font-size:13px;margin-bottom:20px;">
+              Tracks total duration under load, including if you switch tabs.
+            </p>
+            <div class="timer-controls">
+              <button id="btn-stopwatch-start" class="btn btn-primary" type="button">Start Workout</button>
+              <button id="btn-stopwatch-pause" class="btn btn-primary" type="button" style="display:none;background:var(--orange);">Pause</button>
+              <button id="btn-stopwatch-stop" class="btn btn-secondary" type="button">Stop &amp; Save</button>
+              <button id="btn-stopwatch-reset" class="btn btn-secondary" type="button">Reset</button>
+              <button id="btn-stopwatch-log" class="btn btn-ghost" type="button" style="margin-left:auto;">+ Log as Session</button>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="tracker-header">
+              <span class="chip" style="background:rgba(110,231,216,0.12);color:var(--cyan);border-color:rgba(110,231,216,0.3);">Rest Countdown</span>
+              <span class="muted" style="font-size:12px;">Beep when rest ends</span>
+            </div>
+            <h3>Between Sets Interval</h3>
+            <div id="rest-display" class="timer-display" style="color:var(--cyan);">00:01:00</div>
+            <div class="progress" style="margin-bottom:16px;">
+              <span id="rest-progress-bar" style="width:100%;background:linear-gradient(90deg,var(--cyan),var(--accent));"></span>
+            </div>
+            <div class="filters" style="margin-bottom:18px;">
+              <button class="pill" type="button" data-rest-preset="30">30s</button>
+              <button class="pill" type="button" data-rest-preset="45">45s</button>
+              <button class="pill active" type="button" data-rest-preset="60">60s</button>
+              <button class="pill" type="button" data-rest-preset="90">90s</button>
+              <button class="pill" type="button" id="btn-custom-rest">Custom</button>
+            </div>
+            <div class="timer-controls">
+              <button id="btn-rest-start" class="btn btn-primary" type="button">Start Rest</button>
+              <button id="btn-rest-pause" class="btn btn-primary" type="button" style="display:none;background:var(--orange);">Pause</button>
+              <button id="btn-rest-reset" class="btn btn-secondary" type="button">Reset</button>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+    <div data-footer></div>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/audio.js"></script>
+  <script src="./js/timer.js"></script>
+  <script src="./js/workouts.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

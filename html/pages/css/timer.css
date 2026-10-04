@@ -1,0 +1,17 @@
+.timer-display {
+  font-family: var(--display);
+  font-size: clamp(48px, 9vw, 84px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin: 16px 0;
+  color: var(--text);
+}
+
+.timer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
