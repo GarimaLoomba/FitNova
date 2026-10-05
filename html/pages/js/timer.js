@@ -5,7 +5,7 @@
  * setInterval() runs every 1 second and updates the clock text.
  * We also save Date.now() so if the student switches tabs, we can
  * fix the time using document.visibilitychange.
- * Sounds: audio.js
+ * Sounds: audio.js    Music: music.js (Punjabi mixes, no Spotify)
  */
 (function (root) {
   'use strict';
@@ -105,6 +105,7 @@
 
       if (isNew && root.FTAudio && root.FTAudio.playStartCue) root.FTAudio.playStartCue();
       else beep(523, 0.12);
+      if (root.PunjabiPlayer) root.PunjabiPlayer.playWorkoutMix();
 
       var self = this;
       this.stopwatch.intervalId = setInterval(function () {
@@ -121,6 +122,7 @@
       this.stopwatch.isRunning = false;
       this.saveSessionState();
       this.updateStopwatchButtons();
+      if (root.PunjabiPlayer) root.PunjabiPlayer.pause();
     },
 
     stopStopwatch: function () {
@@ -186,6 +188,7 @@
       this.rest.endTime = Date.now() + (this.rest.remainingSeconds * 1000);
       this.updateRestButtons();
       beep(440, 0.1);
+      if (root.PunjabiPlayer) root.PunjabiPlayer.playRestMix();
 
       var self = this;
       this.rest.intervalId = setInterval(function () {
@@ -199,6 +202,9 @@
           self.resetRest();
           chime();
           if (root.showToast) root.showToast('Rest complete! Time for the next set.', 'success');
+          if (self.stopwatch.isRunning && root.PunjabiPlayer) {
+            root.PunjabiPlayer.playWorkoutMix();
+          }
         }
       }, 1000);
       this.updateRestDisplay();
@@ -320,8 +326,9 @@
           var current = root.StorageManager.getSettings().soundEnabled;
           root.StorageManager.updateSettings({ soundEnabled: !current });
           updateSoundIcon();
+          if (root.PunjabiPlayer && root.PunjabiPlayer.syncSound) root.PunjabiPlayer.syncSound();
           if (!current && root.FTAudio && root.FTAudio.test) root.FTAudio.test();
-          else if (root.showToast) root.showToast(!current ? 'Sound on. Beeps can play.' : 'Sound muted.');
+          else if (root.showToast) root.showToast(!current ? 'Sound on. Songs can play.' : 'Sound muted. Songs are paused.');
         });
       }
 
@@ -330,6 +337,7 @@
         testSoundBtn.addEventListener('click', function () {
           if (root.StorageManager) root.StorageManager.updateSettings({ soundEnabled: true });
           updateSoundIcon();
+          if (root.PunjabiPlayer && root.PunjabiPlayer.syncSound) root.PunjabiPlayer.syncSound();
           if (root.FTAudio && root.FTAudio.test) root.FTAudio.test();
           else chime();
         });

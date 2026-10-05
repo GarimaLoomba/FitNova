@@ -488,6 +488,7 @@
         root.ApiService.renderAdviceWidget();
       }
       if (root.TimerManager && typeof root.TimerManager.init === 'function') root.TimerManager.init();
+      if (root.PunjabiPlayer && typeof root.PunjabiPlayer.init === 'function') root.PunjabiPlayer.init();
     });
   });
 
