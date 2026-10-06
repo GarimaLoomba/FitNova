@@ -21,7 +21,8 @@
     history: 'history.html',
     exercises: 'exercises.html',
     timer: 'timer.html',
-    goals: 'goals.html'
+    goals: 'goals.html',
+    routes: 'route.html'
   };
 
   var APP_NAV = [
@@ -32,7 +33,7 @@
     { key: 'progress', label: 'Progress', icon: '▲' },
     { key: 'goals', href: 'goals.html', label: 'Goals', icon: '☆' },
     { key: 'timer', href: 'timer.html', label: 'Timer', icon: '▶' },
-    { key: 'routes', label: 'Routes', icon: '⌖' },
+    { key: 'routes', href: 'route.html', label: 'Routes', icon: '⌖' },
     { key: 'profile', label: 'Profile', icon: '☺' },
     { key: 'settings', label: 'Settings', icon: '⚙' }
   ];
@@ -189,7 +190,8 @@
       '<a href="workout.html">Dashboard</a>' +
       '<a href="exercises.html">Exercise Library</a>' +
       '<button class="linkish" type="button">Progress</button>' +
-      '<a href="timer.html">Timer</a>';
+      '<a href="timer.html">Timer</a>' +
+      '<a href="route.html">Routes</a>';
     desk =
       '<a href="goals.html">Goals</a>' +
       '<a href="history.html">History</a>' +
@@ -330,6 +332,7 @@
       if (go === 'exercises') window.location.href = 'exercises.html';
       if (go === 'timer') window.location.href = 'timer.html';
       if (go === 'goals') window.location.href = 'goals.html';
+      if (go === 'routes') window.location.href = 'route.html';
     });
   }
 
@@ -492,6 +495,7 @@
       if (root.TimerManager && typeof root.TimerManager.init === 'function') root.TimerManager.init();
       if (root.PunjabiPlayer && typeof root.PunjabiPlayer.init === 'function') root.PunjabiPlayer.init();
       if (root.Goals && typeof root.Goals.init === 'function') root.Goals.init();
+      if (root.RoutesManager && typeof root.RoutesManager.init === 'function') root.RoutesManager.init();
     });
   });
 

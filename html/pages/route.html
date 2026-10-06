@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Routes — FitNova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body data-chrome="app" data-active="routes">
+  <!-- Routes page. routes.js asks for GPS, searches a city, and saves routes. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main" class="app-main">
+      <div class="wrap">
+        <!-- Page title. -->
+        <section class="route-hero">
+          <span class="chip">Terrain library</span>
+          <h1 class="page-title">Blaze cleaner trails.</h1>
+          <p class="lede">Create, discover, and reuse routes from the block around the corner to the city you travel to next.</p>
+        </section>
+
+        <!-- Create a route, or jump to the city search. -->
+        <section class="card-grid">
+          <article class="card">
+            <div class="icon-blob">+</div>
+            <h3>Create your own route</h3>
+            <p class="muted">Plan logistics, keep the terrain honest, and save a loop you can run again without guessing the distance.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" type="button" id="create-route">Create route</button>
+            </div>
+          </article>
+          <article class="card">
+            <div class="icon-blob">↗</div>
+            <h3>Discover a new route</h3>
+            <p class="muted">Search a neighborhood, river path, or park loop and keep the ones worth repeating.</p>
+            <div class="hero-actions">
+              <a class="btn btn-secondary" href="#city-form">Find routes</a>
+            </div>
+          </article>
+        </section>
+
+        <!-- GPS button. routes.js asks the browser for your location. -->
+        <section class="panel" style="margin-top:16px;">
+          <div class="section-head">
+            <div>
+              <p class="panel-kicker">Browser Geolocation API</p>
+              <h3>Find Trails Near Current Location</h3>
+            </div>
+            <button class="btn btn-primary" type="button" id="btn-get-location">📍 Find Trails Near Me</button>
+          </div>
+          <div id="geo-status" style="margin-top:8px;">
+            <p class="muted">Click the button above to discover curated running and walking paths relative to your current coordinates without sending data to any external server.</p>
+          </div>
+          <div id="geo-results" hidden style="margin-top:16px;display:grid;gap:12px;"></div>
+        </section>
+
+        <!-- Type a city. routes.js shows sample trails for that name. -->
+        <section class="panel" style="margin-top:16px;">
+          <p class="panel-kicker">Explore city routes</p>
+          <h3>Find a place to train</h3>
+          <form id="city-form" class="search-bar">
+            <input type="text" id="city" name="city" placeholder="Enter a city (e.g. London, New York, Tokyo)" required>
+            <button class="btn btn-primary" type="submit">View routes</button>
+          </form>
+          <div id="city-result" hidden style="margin-top:20px;">
+            <h3></h3>
+            <p class="muted"></p>
+          </div>
+        </section>
+
+        <!-- Routes you saved. routes.js draws and deletes them. -->
+        <section class="panel" style="margin-top:16px;">
+          <div class="section-head">
+            <div>
+              <p class="panel-kicker">Your Saved Terrain</p>
+              <h3>Favorite Training Routes</h3>
+            </div>
+            <button class="btn btn-ghost btn-xs" type="button" id="refresh-routes">Refresh</button>
+          </div>
+          <div id="saved-routes-list">
+            <!-- Populated dynamically by routes.js -->
+          </div>
+        </section>
+      </div>
+    </main>
+    <div data-footer></div>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/routes.js"></script>
+  <script src="./js/workouts.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
