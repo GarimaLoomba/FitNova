@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goals — FitNova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body data-chrome="app" data-active="goals">
+  <!-- Goals page. goals.js draws the progress bars and the custom goal list. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main" class="app-main">
+      <div class="wrap">
+        <!-- Title and a button that opens the workout form. -->
+        <div class="page-head">
+          <div>
+            <p class="muted">Training targets</p>
+            <h1 class="page-title">Goals</h1>
+          </div>
+          <button class="btn btn-primary" data-open-log type="button">Log toward a goal</button>
+        </div>
+
+        <!-- Built-in goals. goals.js fills the bars from saved workouts. -->
+        <section class="feature-grid">
+          <article class="card">
+            <span class="chip">Monthly</span>
+            <h3>80 miles</h3>
+            <p class="muted">Aerobic volume for the current month.</p>
+            <div class="progress" aria-label="Miles progress"><span data-goal="miles"></span></div>
+            <p class="help" data-goal-copy="miles">Progress updates as you log distance.</p>
+          </article>
+          <article class="card">
+            <span class="chip">Consistency</span>
+            <h3>16 sessions</h3>
+            <p class="muted">Show up four times a week, even when the work is easy.</p>
+            <div class="progress"><span data-goal="sessions"></span></div>
+            <p class="help" data-goal-copy="sessions">Count every completed workout.</p>
+          </article>
+          <article class="card">
+            <span class="chip">Strength</span>
+            <h3>8 lifts</h3>
+            <p class="muted">Keep the gym work in the plan, not as an afterthought.</p>
+            <div class="progress"><span data-goal="strength"></span></div>
+            <p class="help" data-goal-copy="strength">Mark strength days in the log.</p>
+          </article>
+        </section>
+
+        <!-- Goals you add yourself. Saved in this browser. -->
+        <section class="panel" style="margin-top:28px;">
+          <div class="section-head">
+            <div>
+              <p class="panel-kicker">Personal Milestones</p>
+              <h3>Custom Fitness Targets</h3>
+            </div>
+            <button class="btn btn-primary btn-sm" type="button" id="btn-add-custom-goal">+ Add Custom Goal</button>
+          </div>
+
+          <div id="custom-goals-grid" class="feature-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+            <!-- Populated dynamically by goals.js -->
+          </div>
+        </section>
+      </div>
+    </main>
+    <div data-footer></div>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/goals.js"></script>
+  <script src="./js/workouts.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
