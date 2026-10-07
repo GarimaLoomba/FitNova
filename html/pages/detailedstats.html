@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detailed stats — FitNova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body data-chrome="app" data-active="stats">
+  <!-- Progress page. workerManager.js adds up workouts. tracker.js estimates calories. api.js loads the daily tip. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main" class="app-main">
+      <div class="wrap">
+        <!-- Title and links back to the dashboard and timer. -->
+        <div class="page-head">
+          <div>
+            <p class="muted">Performance desk</p>
+            <h1 class="page-title">Progress</h1>
+          </div>
+          <div class="tabs">
+            <a href="./workout.html">Monthly view</a>
+            <a class="active" href="./detailedstats.html">Detailed stats</a>
+            <a href="./timer.html">Timers &amp; Audio</a>
+          </div>
+        </div>
+
+        <!-- Time filters. workerManager.js recalculates the totals. -->
+        <div class="filters" style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <button class="pill active" type="button" data-filter>Week</button>
+            <button class="pill" type="button" data-filter>5 weeks</button>
+            <button class="pill" type="button" data-filter>52 weeks</button>
+            <button class="pill" type="button" data-filter>Calendar year</button>
+            <button class="pill" type="button" data-filter>All time</button>
+          </div>
+          <span id="worker-benchmark-badge" class="chip" style="background:rgba(200,245,74,0.12);color:var(--accent);font-size:12px;">⚡ Powered by Web Worker</span>
+        </div>
+
+        <!-- Distance, time, calories, and workout count for the chosen period. -->
+        <section class="stat-grid">
+          <article class="stat-card">
+            <span>Distance</span>
+            <strong class="stat-value"><span data-stat="distance">0.0</span> mi</strong>
+          </article>
+          <article class="stat-card">
+            <span>Duration</span>
+            <strong class="stat-value" data-stat="duration">0m</strong>
+          </article>
+          <article class="stat-card">
+            <span>Calories</span>
+            <strong class="stat-value"><span data-stat="calories">0</span> kcal</strong>
+          </article>
+          <article class="stat-card">
+            <span>Workouts</span>
+            <strong class="stat-value" data-stat="workouts">0</strong>
+          </article>
+        </section>
+
+        <div class="layout-2">
+          <article class="chart-wrap">
+            <div class="section-head">
+              <div>
+                <p class="muted">Distance trend</p>
+                <h3>Training Load</h3>
+              </div>
+            </div>
+            <!-- Line chart of distance. Drawn on the canvas by workerManager.js. -->
+            <canvas id="stats-chart" width="800" height="280"></canvas>
+
+            <!-- Second worker job: count sessions by activity type. -->
+            <div class="panel" style="margin-top:16px;background:var(--surface-2);border-radius:var(--radius-sm);padding:18px;">
+              <p class="panel-kicker">Web Worker</p>
+              <h4 style="margin:2px 0 10px;">Sessions by activity</h4>
+              <div id="activity-mix-list"><p class="muted">Counting sessions…</p></div>
+            </div>
+
+            <!-- Daily quote and tip. api.js fills this box. -->
+            <div class="panel" style="margin-top:16px;background:var(--surface-2);border-radius:var(--radius-sm);padding:18px;">
+              <p class="panel-kicker">Async Knowledge Base</p>
+              <h4 style="margin:2px 0 10px;">Daily Athletic Insights</h4>
+              <div id="daily-advice-widget">
+                <!-- Populated asynchronously via Fetch API by api.js -->
+              </div>
+            </div>
+          </article>
+
+          <!-- Best sessions, plus a small calorie estimate form. -->
+          <aside class="panel">
+            <p class="panel-kicker">Top performances</p>
+            <h3>Personal marks</h3>
+            <div class="perf-list">
+              <div><span>Farthest</span><strong>—</strong></div>
+              <div><span>Most energy burned</span><strong>—</strong></div>
+              <div><span>Longest session</span><strong>—</strong></div>
+              <div><span>Fastest 5k</span><strong>—</strong></div>
+              <div><span>Fastest 10k</span><strong>—</strong></div>
+              <div><span>Half marathon</span><strong>—</strong></div>
+            </div>
+            <form id="calorie-estimate-form" class="calorie-box" style="margin-top:18px;">
+              <p class="panel-kicker">Calorie estimate</p>
+              <label>Weight (kg)<input id="est-weight" type="number" min="30" max="250" value="70" required></label>
+              <label>Activity
+                <select id="est-type">
+                  <option>Running</option><option>Walking</option><option>Cycling</option>
+                  <option>Strength</option><option>Yoga</option><option>HIIT</option><option>Swimming</option>
+                </select>
+              </label>
+              <label>Duration (min)<input id="est-duration" type="number" min="1" value="30" required></label>
+              <button class="btn btn-secondary btn-sm" type="submit">Estimate</button>
+              <p id="est-result" class="help">This is an estimate, not a lab measurement.</p>
+            </form>
+          </aside>
+        </div>
+      </div>
+    </main>
+    <div data-footer></div>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/workerManager.js"></script>
+  <script src="./js/tracker.js"></script>
+  <script src="./js/workouts.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

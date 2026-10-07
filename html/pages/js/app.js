@@ -22,7 +22,8 @@
     exercises: 'exercises.html',
     timer: 'timer.html',
     goals: 'goals.html',
-    routes: 'route.html'
+    routes: 'route.html',
+    progress: 'detailedstats.html'
   };
 
   var APP_NAV = [
@@ -30,7 +31,7 @@
     { key: 'workouts', href: 'history.html', label: 'Workouts', icon: '☰' },
     { key: 'exercises', href: 'exercises.html', label: 'Exercises', icon: '＋' },
     { key: 'history', href: 'history.html', label: 'History', icon: '◷' },
-    { key: 'progress', label: 'Progress', icon: '▲' },
+    { key: 'progress', href: 'detailedstats.html', label: 'Progress', icon: '▲' },
     { key: 'goals', href: 'goals.html', label: 'Goals', icon: '☆' },
     { key: 'timer', href: 'timer.html', label: 'Timer', icon: '▶' },
     { key: 'routes', href: 'route.html', label: 'Routes', icon: '⌖' },
@@ -149,7 +150,7 @@
             '<a href="workout.html">Dashboard</a>' +
             '<a href="history.html">Workouts</a>' +
             '<a href="exercises.html">Exercises</a>' +
-            '<button class="linkish" type="button">Progress</button>' +
+            '<a href="detailedstats.html">Progress</a>' +
           '</nav>';
 
     var right = isApp
@@ -189,7 +190,7 @@
     training =
       '<a href="workout.html">Dashboard</a>' +
       '<a href="exercises.html">Exercise Library</a>' +
-      '<button class="linkish" type="button">Progress</button>' +
+      '<a href="detailedstats.html">Progress</a>' +
       '<a href="timer.html">Timer</a>' +
       '<a href="route.html">Routes</a>';
     desk =
@@ -333,6 +334,7 @@
       if (go === 'timer') window.location.href = 'timer.html';
       if (go === 'goals') window.location.href = 'goals.html';
       if (go === 'routes') window.location.href = 'route.html';
+      if (go === 'progress') window.location.href = 'detailedstats.html';
     });
   }
 
@@ -496,6 +498,10 @@
       if (root.PunjabiPlayer && typeof root.PunjabiPlayer.init === 'function') root.PunjabiPlayer.init();
       if (root.Goals && typeof root.Goals.init === 'function') root.Goals.init();
       if (root.RoutesManager && typeof root.RoutesManager.init === 'function') root.RoutesManager.init();
+      if (root.WorkerManager && typeof root.WorkerManager.init === 'function' && document.getElementById('stats-chart')) {
+        root.WorkerManager.init();
+      }
+      if (root.Tracker && typeof root.Tracker.init === 'function') root.Tracker.init();
     });
   });
 
