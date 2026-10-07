@@ -23,7 +23,8 @@
     timer: 'timer.html',
     goals: 'goals.html',
     routes: 'route.html',
-    progress: 'detailedstats.html'
+    progress: 'detailedstats.html',
+    profile: 'profile.html'
   };
 
   var APP_NAV = [
@@ -35,7 +36,7 @@
     { key: 'goals', href: 'goals.html', label: 'Goals', icon: '☆' },
     { key: 'timer', href: 'timer.html', label: 'Timer', icon: '▶' },
     { key: 'routes', href: 'route.html', label: 'Routes', icon: '⌖' },
-    { key: 'profile', label: 'Profile', icon: '☺' },
+    { key: 'profile', href: 'profile.html', label: 'Profile', icon: '☺' },
     { key: 'settings', label: 'Settings', icon: '⚙' }
   ];
 
@@ -197,7 +198,7 @@
       '<a href="goals.html">Goals</a>' +
       '<a href="history.html">History</a>' +
       '<button class="linkish" type="button">Settings</button>' +
-      '<button class="linkish" type="button">Profile</button>';
+      '<a href="profile.html">Profile</a>';
     return (
       '<footer class="site-footer">' +
         '<div class="wrap footer-grid">' +
@@ -335,6 +336,7 @@
       if (go === 'goals') window.location.href = 'goals.html';
       if (go === 'routes') window.location.href = 'route.html';
       if (go === 'progress') window.location.href = 'detailedstats.html';
+      if (go === 'profile') window.location.href = 'profile.html';
     });
   }
 
@@ -502,6 +504,7 @@
         root.WorkerManager.init();
       }
       if (root.Tracker && typeof root.Tracker.init === 'function') root.Tracker.init();
+      if (root.Profile && typeof root.Profile.init === 'function') root.Profile.init();
     });
   });
 

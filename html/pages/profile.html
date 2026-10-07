@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile — FitNova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body data-chrome="app" data-active="profile">
+  <!-- Profile page. profile.js fills the name and stats. tracker.js draws the weight log. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main" class="app-main">
+      <div class="wrap">
+        <!-- Name and log-out button. profile.js writes the name. -->
+        <div class="page-head">
+          <div>
+            <p class="muted">Local profile</p>
+            <h1 class="page-title" id="profile-name">Athlete</h1>
+          </div>
+          <button class="btn btn-secondary" type="button" data-logout>Log out</button>
+        </div>
+        <!-- Account details and the current streak. -->
+        <section class="layout-2">
+          <article class="panel">
+            <p class="panel-kicker">Account</p>
+            <h3>This browser only</h3>
+            <p class="muted" style="margin:12px 0;">This is a local demo login, not production authentication. Your profile stays on this device in IndexedDB.</p>
+            <div class="metric-pill-row">
+              <div class="metric-pill"><span>Email</span><strong id="profile-email">—</strong></div>
+              <div class="metric-pill"><span>User ID</span><strong id="profile-userid">—</strong></div>
+              <div class="metric-pill"><span>Workouts</span><strong id="profile-workouts">0</strong></div>
+              <div class="metric-pill"><span>BMI</span><strong id="profile-bmi">—</strong></div>
+            </div>
+            <p class="help">BMI is a general calculation, not a medical diagnosis.</p>
+          </article>
+          <aside class="panel">
+            <p class="panel-kicker">Consistency</p>
+            <h3>Streaks</h3>
+            <p style="font-size:28px;font-family:var(--display);margin:12px 0;">🔥 <span id="profile-streak">0</span> day workout streak</p>
+            <p class="muted">Longest streak: <strong id="profile-best-streak">0</strong> days</p>
+            <div class="hero-actions" style="margin-top:20px;">
+              <button class="btn btn-primary" type="button">Edit settings</button>
+              <a class="btn btn-secondary" href="workout.html">Open dashboard</a>
+            </div>
+          </aside>
+        </section>
+        <!-- Weight form, chart, and table. tracker.js saves each entry. -->
+        <section class="panel" id="weight" style="margin-top:20px;">
+          <div class="section-head"><div><p class="panel-kicker">Body</p><h3>Weight tracker</h3></div></div>
+          <form id="weight-log-form" class="form-grid" style="grid-template-columns: 1fr 1fr 1fr auto; align-items: end;">
+            <label>Weight (kg)<input type="number" id="weight-log-val" step="0.1" min="20" max="350" required></label>
+            <label>Date<input type="date" id="weight-log-date" required></label>
+            <label>Note<input type="text" id="weight-log-note"></label>
+            <button class="btn btn-primary btn-sm" type="submit">Log weight</button>
+          </form>
+          <div class="metric-pill-row" style="margin-top:16px;">
+            <div class="metric-pill"><span>Current</span><strong id="weight-current">—</strong></div>
+            <div class="metric-pill"><span>Starting</span><strong id="weight-starting">—</strong></div>
+            <div class="metric-pill"><span>Change</span><strong id="weight-change">—</strong></div>
+            <div class="metric-pill"><span>Lowest</span><strong id="weight-lowest">—</strong></div>
+            <div class="metric-pill"><span>Highest</span><strong id="weight-highest">—</strong></div>
+          </div>
+          <canvas id="weight-chart" width="800" height="220"></canvas>
+          <div class="table-wrap">
+            <table class="weight-table">
+              <thead><tr><th>Date</th><th>Weight</th><th>Note</th><th></th></tr></thead>
+              <tbody id="weight-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+    <div data-footer></div>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/tracker.js"></script>
+  <script src="./js/profile.js"></script>
+  <script src="./js/workouts.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
