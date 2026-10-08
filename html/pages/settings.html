@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings &amp; Data — FitNova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body data-chrome="app" data-active="settings">
+  <!-- Settings page. settings.js reads this form and saves it with StorageManager. -->
+  <div class="page">
+    <div data-header></div>
+    <main id="main" class="app-main">
+      <div class="wrap">
+        <!-- Page title. -->
+        <div class="page-head">
+          <div>
+            <p class="muted">Preferences &amp; Portability</p>
+            <h1 class="page-title">Settings &amp; Data</h1>
+          </div>
+        </div>
+
+        <section class="layout-2">
+          <!-- Name, body stats, goals, sound, and theme. settings.js saves this form. -->
+          <article class="panel">
+            <div class="section-head">
+              <div>
+                <p class="panel-kicker">Configuration</p>
+                <h3>Profile &amp; Daily Goals</h3>
+              </div>
+            </div>
+
+            <form id="settings-form" class="form-grid">
+              <label>Athlete Name
+                <input type="text" id="setting-name" placeholder="Alex Morgan" required>
+              </label>
+
+              <div class="form-row">
+                <label>Height (cm)
+                  <input type="number" id="setting-height" min="50" max="250" required placeholder="175">
+                </label>
+                <label>Current Weight (kg)
+                  <input type="number" id="setting-weight" min="20" max="350" step="0.1" required placeholder="70">
+                </label>
+              </div>
+
+              <div class="tracker-header" style="margin-top:16px;">
+                <span class="tracker-title" style="font-size:12px;">Daily Targets</span>
+              </div>
+
+              <div class="form-row">
+                <label>Daily Steps Goal
+                  <input type="number" id="setting-steps" min="1000" max="100000" step="500" required placeholder="10000">
+                </label>
+                <label>Water Goal (Glasses)
+                  <input type="number" id="setting-water" min="1" max="30" required placeholder="8">
+                </label>
+              </div>
+
+              <label>Daily Calorie Target (kcal)
+                <input type="number" id="setting-calories" min="500" max="10000" step="50" required placeholder="2200">
+              </label>
+
+              <div class="tracker-header" style="margin-top:16px;">
+                <span class="tracker-title" style="font-size:12px;">Audio &amp; Notification Preferences</span>
+              </div>
+
+              <label class="check">
+                <input type="checkbox" id="setting-sound" checked>
+                <span>Enable Web Audio API beeps for workout rest timers</span>
+              </label>
+              <button class="btn btn-secondary btn-xs" type="button" id="btn-test-sound">▶ Test sound</button>
+
+              <label class="check">
+                <input type="checkbox" id="setting-notifications">
+                <span>Enable browser notifications for hydration and workout alerts</span>
+              </label>
+
+              <label>Weekly workout goal
+                <input type="number" id="setting-weekly" min="1" max="14" value="4">
+              </label>
+
+              <div class="form-row">
+                <label>Distance units
+                  <select id="setting-distance-unit"><option value="mi">Miles</option><option value="km">Kilometers</option></select>
+                </label>
+                <label>Weight units
+                  <select id="setting-weight-unit"><option value="kg">kg</option><option value="lbs">lbs</option></select>
+                </label>
+              </div>
+              <div class="form-row">
+                <label>Water units
+                  <select id="setting-water-unit"><option value="ml">ml / L</option><option value="oz">oz</option></select>
+                </label>
+                <label>Theme
+                  <select id="setting-theme"><option value="dark">Dark</option><option value="light">Light</option></select>
+                </label>
+              </div>
+              <label class="check"><input type="checkbox" id="setting-water-reminder" checked><span>Water reminder</span></label>
+              <label class="check"><input type="checkbox" id="setting-workout-reminder" checked><span>Workout reminder</span></label>
+              <label class="check"><input type="checkbox" id="setting-goal-reminder" checked><span>Goal reminder</span></label>
+
+              <div class="hero-actions" style="margin-top:20px;">
+                <button class="btn btn-primary" type="submit">Save Preferences</button>
+              </div>
+            </form>
+          </article>
+
+          <!-- Right: Data Portability & Danger Zone -->
+          <div style="display:grid;gap:16px;">
+            <!-- Download or upload a JSON backup, or load sample workouts. -->
+            <article class="panel">
+              <div class="section-head">
+                <div>
+                  <p class="panel-kicker">Data Ownership</p>
+                  <h3>Backup &amp; Restore</h3>
+                </div>
+              </div>
+
+              <p class="muted" style="font-size:13px;line-height:1.5;margin-bottom:18px;">
+                Fitness data for this profile is stored in IndexedDB on this device. Export a JSON snapshot for backups, or import previously saved records.
+              </p>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <button class="btn btn-primary btn-sm" type="button" id="btn-export-data">⬇ Export JSON</button>
+                <button class="btn btn-secondary btn-sm" type="button" id="btn-import-trigger">⬆ Import JSON</button>
+                <button class="btn btn-ghost btn-sm" type="button" id="btn-load-demo">Load demo data</button>
+                <input type="file" id="input-import-file" accept=".json,application/json" style="display:none;">
+              </div>
+
+              <div style="margin-top:20px;padding:14px;border-radius:var(--radius-sm);background:var(--surface-2);font-size:12px;color:var(--muted);line-height:1.5;">
+                <strong>Web APIs Demonstrated:</strong>
+                <ul style="margin:6px 0 0;padding-left:18px;">
+                  <li><code>Blob API</code>: Generates downloadable JSON file directly in memory</li>
+                  <li><code>URL.createObjectURL()</code>: Creates temporary download link</li>
+                  <li><code>FileReader API</code>: Asynchronously parses uploaded JSON file</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Deletes saved workouts and tracker data after you confirm. -->
+            <article class="panel" style="border-color:rgba(255,93,108,0.3);">
+              <p class="panel-kicker" style="color:var(--red);">Danger Zone</p>
+              <h3 style="color:var(--red);">Reset All Data</h3>
+              <p class="muted" style="font-size:13px;line-height:1.5;margin:8px 0 16px;">
+                Permanently wipes all logged workouts, steps, water, weight history, and custom goals from this device. Requires confirmation.
+              </p>
+              <button class="btn btn-secondary btn-sm" type="button" id="btn-reset-all" style="border-color:var(--red);color:var(--red);">
+                Reset All Fitness Records
+              </button>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+    <div data-footer></div>
+  </div>
+  <script src="./js/utils.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/audio.js"></script>
+  <script src="./js/settings.js"></script>
+  <script src="./js/workouts.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
