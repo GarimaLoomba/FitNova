@@ -1,0 +1,96 @@
+div {
+    background-color: white;
+    width: 700px;
+    margin: auto;
+    margin-top: 150px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    padding-top: 40px;
+    color: black;
+
+
+    h2 {
+        font-size: 80px;
+        font-weight: bolder;
+
+    }
+
+    h1 {
+        font-weight:500;
+        border: 5px solid white;
+        width: auto;
+
+    }
+
+    h3 {
+        padding-top: 0%;
+        padding-bottom: 0%;
+
+    }
+}
+
+
+body {
+    background-color: black;
+    /* overflow-y: hidden; 
+overflow-x: hidden; */
+    /* background-image: url(./png/logo.png);
+background-repeat: no-repeat; */
+}
+
+div table {
+    font-size: 50px;
+
+}
+
+table {
+    width: 100%;
+    padding-left: 50px;
+    padding-top: 20px;
+    padding-right: 20px;
+    border: 4px white solid;
+
+
+    input {
+        height: 30px;
+    }
+}
+
+
+
+button {
+    margin-left: 50%;
+    margin-right: 50%;
+    width: 100px;
+    height: 40px;
+    margin-top: 0%;
+    align-content: center;
+    color: white;
+
+
+    background-color: white;
+}
+
+#button {
+    text-decoration: none;
+    font-weight: bolder;
+    color: #1E201E;
+    font-size: larger;
+}
+
+.protest-guerrilla-regular {
+    font-family: "Protest Guerrilla", sans-serif;
+    font-weight: 50;
+    font-style: normal;
+    align-items: center;
+    text-align: center;
+    margin-left: 3%;
+
+
+    
+}
+@media all and (min-width: 1025px) {
+    the_name_of_the_button_class_or_id {
+        display: none;
+    } 
+} 

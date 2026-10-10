@@ -1,0 +1,132 @@
+#container {
+    overflow-wrap: normal;
+    padding: 10px;
+    margin: 10px;
+}
+
+body {
+    overflow: auto;
+    position: static;
+}
+
+.child1 {
+    background-image: url(https://img.freepik.com/free-vector/black-background-with-curve-shadow-effect-lines_1017-38063.jpg?ga=GA1.1.1218407610.1727616405&semt=ais_hybrid);
+    background-repeat: no-repeat;
+   
+    background-size: 100%;
+    height: 400px;
+    width: 1500px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+.child2 {
+    
+    color: black;
+    display: grid;
+    text-align: left;
+    padding-top: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 50px;
+    width: 100%;
+
+
+    img {
+        width: 300px;
+        height: 250px;
+    }
+
+    button {
+        text-align: center;
+        width: 300px;
+        background-color: black;
+        color: white;
+    }
+
+
+
+}
+
+.child3 {
+    width: 1500px;
+    background-color: black;
+    color: white;
+    padding-bottom: 40px;
+
+    button {
+        background-color: grey;
+        color: black;
+        width: 300px;
+
+    }
+
+    form {
+        text-align: center;
+
+    }
+}
+
+.card {
+    border: 10px solid black;
+    background-color: rgb(172, 166, 166);
+}
+
+.child {
+    width: 100%;
+
+}
+
+.ending {
+    background-color: black;
+    color: white;
+    width: 1500px;
+}
+.footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+    height: 30px;
+    width: 1500px;
+}
+
+
+#container>.child1>h1 {
+    font-size: 50px;
+    text-align: left;
+    padding-left: 40px;
+    font-style: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 1000;
+}
+
+#container>.child1>h2 {
+    font-size: 15px;
+    text-align: right;
+    padding-right: 60px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+#container>.child3>h1 {
+    font-size: 50px;
+    text-align: center;
+    padding-top: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#container>.child3>p {
+    text-align: center;
+}
+#container>.child3>h3{
+    text-align: center;
+    font-weight: 100;
+}
+
+@media all and (min-width: 1025px) {
+    the_name_of_the_button_class_or_id {
+        display: none;
+    } 
+} 

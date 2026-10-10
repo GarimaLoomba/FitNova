@@ -1,0 +1,45 @@
+
+
+body{ background-color: grey ;
+color: white;}
+.child1{ text-align: center; 
+
+h1{ font-size:50px;}
+h2{ font-size: 40px;}
+a{ text-decoration: none;
+color: white;}
+
+}
+table{ text-align: center; width: 1500px; border: 9;
+
+input{ width:500px; height: 30px;}
+
+select{ width: 500px; height: 30px;}
+
+}
+
+.child3{ text-align: center;
+a{ text-decoration: none;color: azure;}
+button{ background-color: grey;
+color: black;}}
+
+.protest-guerrilla-regular {
+        font-family: "Protest Guerrilla", sans-serif;
+        font-weight: 50;
+        font-style: normal;
+        align-items: center;
+        text-align: center;
+        margin-left: 3%;
+
+    }
+
+    .dela-gothic-one-regular {
+        font-family: "Dela Gothic One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+    @media all and (min-width: 1025px) {
+        the_name_of_the_button_class_or_id {
+            display: none;
+        } 
+    } 

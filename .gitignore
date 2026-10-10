@@ -9,5 +9,10 @@ desktop.ini
 .idea/
 
 # Logs and dependencies
-*.log
+*.log   
 node_modules/
+
+# Local copy of the full home page, used when we add login later
+html/pages/index.full.html
+*.zip
+icon1.jpg
